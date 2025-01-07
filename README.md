@@ -61,19 +61,21 @@ Pour atteindre nos objectifs, nous avons adopté une approche bidirectionnelle c
 
 
 
-# Analyse Dynamique de MOBILedit Forensic Express Pro
+# 1, Analyse Dynamique de MOBILedit Forensic Express Pro
 
 ## Introduction
 
 L'analyse dynamique représente une méthodologie sophistiquée permettant de comprendre le comportement des logiciels en examinant leurs caractéristiques d'exécution. Appliquée à MOBILedit Forensic Express Pro, cette approche révèle des informations cruciales sur la façon dont l'outil forensique interagit avec les appareils mobiles, gère l'extraction des données et communique avec le système hôte. Ce guide complet explore les subtilités de la conduite d'une analyse dynamique en utilisant trois outils puissants : **Procmon**, **Wireshark** (avec **USBPcap**), **Regshot**, et **Procdot**.
 
-## 1. Préparation de l'Analyse Dynamique
+##  Préparation de l'Analyse Dynamique
 
 ### 1.1 Configuration de l'Environnement
 
 Un environnement d'analyse correctement configuré est essentiel pour obtenir des résultats précis et fiables. Les composants suivants doivent être soigneusement préparés :
 
 #### Configuration de la Machine Virtuelle
+
+
 L'utilisation d'une machine virtuelle offre plusieurs avantages :
 - Isolation du système hôte pour éviter la contamination croisée
 - Possibilité de créer des instantanés avant et après l'analyse
@@ -81,8 +83,10 @@ L'utilisation d'une machine virtuelle offre plusieurs avantages :
 - Accès réseau contrôlé pour la surveillance des communications
 
 Spécifications recommandées pour la VM :
-- Minimum 8 Go de RAM allouée
-- Au moins 100 Go d'espace de stockage
+- Minimum 4 Go de RAM allouée
+![image](https://github.com/user-attachments/assets/3939cbe7-d372-44d9-91e2-5e84e302a9cb)
+
+- Au moins 50 Go d'espace de stockage
 - Capacité de transmission USB activée
 - Adaptateur réseau en mode pont
 
@@ -240,10 +244,85 @@ Procdot offre des capacités puissantes de visualisation :
 - Regroupement logique des activités
 - Identification des modèles comportementaux
 - Documentation des flux de travail
+Je vais ajouter une section complète sur Regshot après la partie Procmon et avant Wireshark, en gardant la même structure et le même niveau de détail :
 
-## 5. Corrélation et Analyse Intégrée
 
-### 5.1 Synthèse des Données
+
+## 5. Analyse Comparative avec Regshot
+
+### 5.1 Capacités et Fonctionnalités de Regshot
+
+L'utilisation de Regshot permet une analyse comparative approfondie des changements système :
+
+**Capture d'État Système :**
+- Enregistrement complet de l'état du registre Windows
+- Inventaire détaillé des fichiers et répertoires
+- Documentation des permissions et attributs
+- Suivi des modifications de taille et dates des fichiers
+- Capture des variables d'environnement système
+
+**Types de Modifications Tracées :**
+- Ajouts et suppressions dans le registre
+- Modifications des valeurs de registre existantes
+- Création et suppression de fichiers
+- Modifications de structure des répertoires
+- Changements dans les droits d'accès
+
+### 5.2 Méthodologie d'Utilisation de Regshot
+
+Une approche méthodique garantit des résultats précis et exploitables :
+
+**Processus de Capture :**
+1. Premier instantané avant l'installation ou l'exécution
+2. Actions spécifiques sur le logiciel cible
+3. Deuxième instantané après les modifications
+4. Génération du rapport comparatif détaillé
+
+**Configuration Optimale :**
+- Définition des répertoires à surveiller
+- Exclusion des dossiers temporaires
+- Paramétrage de la profondeur d'analyse
+- Sélection du format de rapport approprié
+- Configuration des filtres de comparaison
+
+### 5.3 Analyse des Résultats Regshot
+
+L'interprétation des rapports Regshot nécessite une analyse structurée :
+
+**Catégorisation des Changements :**
+- Modifications critiques du système
+- Changements temporaires
+- Installations de composants
+- Modifications de configuration
+- Traces résiduelles
+
+**Points d'Attention Particuliers :**
+- Modifications persistantes du registre
+- Installation de nouveaux services
+- Création de clés de démarrage automatique
+- Modifications des paramètres système
+- Installation de pilotes ou DLLs
+
+### 5.4 Intégration avec Autres Outils
+
+Regshot complète efficacement les autres outils d'analyse :
+
+**Synergies avec Procmon :**
+- Validation croisée des modifications détectées
+- Confirmation des changements permanents
+- Identification des faux positifs
+- Documentation des changements système
+
+**Complémentarité d'Analyse :**
+- Comparaison avec les logs Wireshark
+- Corrélation avec les visualisations ProcDot
+- Validation des hypothèses d'analyse
+- Construction d'une vue système complète
+
+
+## 6. Corrélation et Analyse Intégrée
+
+### 6.1 Synthèse des Données
 
 L'intégration des données des différents outils permet une compréhension complète :
 
