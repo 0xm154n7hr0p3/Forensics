@@ -51,10 +51,213 @@ L'architecture logicielle de l'application, notamment :
 
 Les processus d'acquisition de données, incluant :
 
-1. Les méthodes d'extraction physique et logique
+1. Les méthodes d'extraction logiques
 2. Les protocoles de communication avec les appareils mobiles
 3. Les mécanismes de validation et d'intégrité des données
 4. Les formats de stockage et d'export des données extraites
 
 ## Méthodologie d'Analyse
-Pour atteindre nos objectifs, nous avons adopté une approche bidirectionnelle combinant analyse statique et dynamique. Cette méthodologie holistique permet d'obtenir une compréhension complète du logiciel sous tous ses aspects.
+Pour atteindre nos objectifs, nous avons adopté une approche bidirectionnelle combinant **analyse statique et dynamique**. Cette méthodologie holistique permet d'obtenir une compréhension complète du logiciel sous tous ses aspects.
+
+
+
+# Analyse Dynamique de MOBILedit Forensic Express Pro
+
+## Introduction
+
+L'analyse dynamique représente une méthodologie sophistiquée permettant de comprendre le comportement des logiciels en examinant leurs caractéristiques d'exécution. Appliquée à MOBILedit Forensic Express Pro, cette approche révèle des informations cruciales sur la façon dont l'outil forensique interagit avec les appareils mobiles, gère l'extraction des données et communique avec le système hôte. Ce guide complet explore les subtilités de la conduite d'une analyse dynamique en utilisant trois outils puissants : **Procmon**, **Wireshark** (avec **USBPcap**), **Regshot**, et **Procdot**.
+
+## 1. Préparation de l'Analyse Dynamique
+
+### 1.1 Configuration de l'Environnement
+
+Un environnement d'analyse correctement configuré est essentiel pour obtenir des résultats précis et fiables. Les composants suivants doivent être soigneusement préparés :
+
+#### Configuration de la Machine Virtuelle
+L'utilisation d'une machine virtuelle offre plusieurs avantages :
+- Isolation du système hôte pour éviter la contamination croisée
+- Possibilité de créer des instantanés avant et après l'analyse
+- Capacités de réinitialisation facile si le système devient instable
+- Accès réseau contrôlé pour la surveillance des communications
+
+Spécifications recommandées pour la VM :
+- Minimum 8 Go de RAM allouée
+- Au moins 100 Go d'espace de stockage
+- Capacité de transmission USB activée
+- Adaptateur réseau en mode pont
+
+#### Exigences d'Installation des Outils
+
+Chaque outil d'analyse nécessite une configuration spécifique :
+
+**Configuration de Procmon :**
+- Dernière version de la Suite Sysinternals
+- Privilèges administrateur activés
+- Chemins des symboles appropriés configurés
+- Journalisation au démarrage activée pour une analyse complète
+
+**Configuration de Wireshark & USBPcap :**
+- Dernière version stable de Wireshark
+- Pilote USBPcap correctement installé
+- Privilèges de capture appropriés configurés
+- Analyseurs de protocoles pertinents activés
+
+**Prérequis pour Procdot :**
+- Dernière version installée
+- Dépendances GraphViz configurées
+- Ressources système suffisantes allouées
+- Framework .NET compatible installé
+  
+**Configuration de Regshot :**
+- Version stable 1.9.0 ou supérieure installée
+- Exécution en tant qu'administrateur activée
+- Mode de comparaison détaillée activé
+- Répertoires d'exclusion configurés (temp, cache)
+- Paramètres de capture de registre optimisés
+- Dossier de sortie des rapports défini
+  
+### 1.2 Préparation des Appareils de Test
+
+Le choix et la préparation des appareils de test impactent significativement la qualité de l'analyse :
+
+**Exigences pour les Appareils Mobiles :**
+- État de réinitialisation d'usine recommandé
+- Données de test connues installées
+- Options développeur activées
+- Débogage USB activé
+- Installation correcte des pilotes vérifiée
+
+## 2. Analyse Avancée avec Procmon
+
+### 2.1 Capacités Approfondies de Procmon
+
+Les capacités de surveillance de Procmon s'étendent au-delà des appels système de base :
+
+**Surveillance du Système de Fichiers :**
+- Opérations de Création, Lecture, Écriture, Suppression
+- Modifications des attributs de fichiers
+- Énumération des répertoires
+- Transactions du système de fichiers
+- Accès aux flux de données alternatifs
+
+**Analyse du Registre :**
+- Création et suppression de clés
+- Modifications des valeurs
+- Énumération des clés
+- Transactions du registre
+- Modifications des descripteurs de sécurité
+
+**Suivi de l'Activité des Processus :**
+- Création et terminaison des threads
+- Chargement des modules
+- Relations entre processus
+- Opérations sur les handles
+- Changements de contexte de sécurité
+
+### 2.2 Méthodologie Avancée pour Procmon
+
+Le processus d'analyse peut être optimisé grâce à une préparation minutieuse :
+
+**Configuration Pré-Capture :**
+1. Configurer les tailles de buffer appropriées
+2. Mettre en place des règles de filtrage avancées
+3. Activer les traces de pile
+4. Configurer les chemins des symboles
+5. Préparer les emplacements de journalisation
+
+**Techniques de Filtrage Avancées :**
+La création de filtres sophistiqués aide à se concentrer sur les données pertinentes :
+```plaintext
+Process Name contains MOBILedit
+Operation is WriteFile
+Result contains SUCCESS
+```
+
+### 2.3 Analyse des Résultats
+
+L'interprétation des données capturées nécessite une approche systématique :
+
+**Identification des Modèles :**
+- Séquences d'opérations répétées
+- Accès aux ressources système
+- Comportements anormaux ou inattendus
+- Interactions avec d'autres processus
+
+**Points d'Intérêt Particuliers :**
+- Création de fichiers temporaires
+- Modifications du registre persistantes
+- Communications réseau
+- Chargement de DLL externes
+
+## 3. Analyse Approfondie avec Wireshark et USBPcap
+
+### 3.1 Compréhension du Trafic USB
+
+L'analyse du trafic USB révèle des informations cruciales sur la communication entre MOBILedit et l'appareil mobile :
+
+**Types de Transferts USB :**
+- Transferts de contrôle pour la configuration
+- Transferts en masse pour les données
+- Transferts d'interruption pour les événements
+- Transferts isochrones pour les flux continus
+
+**Protocoles de Communication :**
+- MTP (Media Transfer Protocol)
+- PTP (Picture Transfer Protocol)
+- Protocoles propriétaires
+- Communications de débogage
+
+### 3.2 Méthodologie d'Analyse USB
+
+Une approche structurée de l'analyse du trafic USB comprend :
+
+**Phase de Capture :**
+1. Identification des interfaces USB pertinentes
+2. Configuration des filtres de capture
+3. Synchronisation avec les actions de MOBILedit
+4. Documentation des événements observés
+
+**Analyse des Données :**
+- Décodage des paquets USB
+- Reconstruction des flux de données
+- Identification des commandes et réponses
+- Analyse des protocoles de haut niveau
+
+## 4. Visualisation Avancée avec Procdot
+
+### 4.1 Exploitation Optimale de Procdot
+
+Procdot offre des capacités puissantes de visualisation :
+
+**Fonctionnalités Clés :**
+- Représentation graphique des relations entre processus
+- Visualisation temporelle des événements
+- Cartographie des accès aux ressources
+- Identification des dépendances
+
+**Techniques d'Analyse :**
+- Filtrage des événements non pertinents
+- Regroupement logique des activités
+- Identification des modèles comportementaux
+- Documentation des flux de travail
+
+## 5. Corrélation et Analyse Intégrée
+
+### 5.1 Synthèse des Données
+
+L'intégration des données des différents outils permet une compréhension complète :
+
+**Points de Corrélation :**
+- Correspondance entre les événements système et le trafic USB
+- Relations entre les accès fichiers et les transferts de données
+- Synchronisation des activités entre les différents processus
+
+**Analyse Temporelle :**
+- Séquençage des opérations
+- Identification des dépendances temporelles
+- Repérage des goulots d'étranglement
+- Optimisation des performances
+
+## Conclusion
+
+L'analyse dynamique de MOBILedit Forensic Express Pro nécessite une approche méthodique et une compréhension approfondie des outils utilisés. Ce guide fournit une base solide pour conduire une analyse complète et obtenir des résultats significatifs. La combinaison de Procmon, Wireshark avec USBPcap, et Procdot permet une compréhension détaillée du comportement de l'outil, essentielle pour les investigations forensiques et l'évaluation des capacités du logiciel.
