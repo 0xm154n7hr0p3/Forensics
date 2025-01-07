@@ -187,9 +187,8 @@ Le processus d'analyse peut être optimisé grâce à une préparation minutieus
 La création de filtres sophistiqués aide à se concentrer sur les données pertinentes :
 ```plaintext
 Process Name contains MOBILedit
-Operation is WriteFile
-Result contains SUCCESS
 ```
+![pasted_image002](https://github.com/user-attachments/assets/65d4143d-5b3f-47ed-b61d-2b888fa103ca)
 
 ### 2.3 Analyse des Résultats
 
@@ -228,6 +227,9 @@ L'analyse du trafic USB révèle des informations cruciales sur la communication
 ### 3.2 Méthodologie d'Analyse USB
 
 Une approche structurée de l'analyse du trafic USB comprend :
+
+
+![pasted_image009](https://github.com/user-attachments/assets/dcc3b958-38d5-42be-a8a8-9df0e77ca095)
 
 **Phase de Capture :**
 1. Identification des interfaces USB pertinentes
