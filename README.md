@@ -61,7 +61,7 @@ Pour atteindre nos objectifs, nous avons adopté une approche bidirectionnelle c
 
 
 
-# 1, Analyse Dynamique de MOBILedit Forensic Express Pro
+# 1 Analyse Dynamique de MOBILedit Forensic Express Pro
 
 ## Introduction
 
@@ -89,30 +89,40 @@ Spécifications recommandées pour la VM :
 - Au moins 50 Go d'espace de stockage
 - Capacité de transmission USB activée
 - Adaptateur réseau en mode pont
+  ![image](https://github.com/user-attachments/assets/359f5bb2-d6cc-4e97-b98a-85a852d435ed)
+
 
 #### Exigences d'Installation des Outils
 
 Chaque outil d'analyse nécessite une configuration spécifique :
 
 **Configuration de Procmon :**
+![image](https://github.com/user-attachments/assets/e0fd56e8-5605-4c4b-a04d-602e2388b0d5)
+
 - Dernière version de la Suite Sysinternals
 - Privilèges administrateur activés
 - Chemins des symboles appropriés configurés
 - Journalisation au démarrage activée pour une analyse complète
 
 **Configuration de Wireshark & USBPcap :**
+![image](https://github.com/user-attachments/assets/7a508290-3a12-44d3-8710-70f97eea94e6)
+
 - Dernière version stable de Wireshark
 - Pilote USBPcap correctement installé
 - Privilèges de capture appropriés configurés
 - Analyseurs de protocoles pertinents activés
 
 **Prérequis pour Procdot :**
+![image](https://github.com/user-attachments/assets/ffdd19f1-4827-4548-9ef8-98e9ed97661e)
+
 - Dernière version installée
 - Dépendances GraphViz configurées
 - Ressources système suffisantes allouées
 - Framework .NET compatible installé
   
 **Configuration de Regshot :**
+![image](https://github.com/user-attachments/assets/3e259565-bbfd-44d9-834b-9f9d2eb7aa97)
+
 - Version stable 1.9.0 ou supérieure installée
 - Exécution en tant qu'administrateur activée
 - Mode de comparaison détaillée activé
