@@ -2,29 +2,29 @@
 
 **MOBILedit Forensic Express Pro** est un logiciel d'analyse avancé conçu pour l'extraction, l'analyse et la gestion des données provenant de téléphones mobiles et d'autres appareils connectés. Il est principalement utilisé par les experts en cybersécurité, les enquêteurs judiciaires, les forces de l'ordre et les analystes en criminalistique numérique pour recueillir des preuves numériques dans le cadre d'enquêtes.
 
-## Caractéristiques principales
+## 1 Caractéristiques principales
 
-### 1. **Extraction de données**
+### 1.1 **Extraction de données**
 - Récupère des données comme les appels, messages, contacts, fichiers multimédias, applications (WhatsApp, Messenger, etc.) et historique de navigation.
 - Compatible avec une grande variété d'appareils et de systèmes d'exploitation, y compris Android et iOS.
 
-### 2. **Analyse avancée**
+### 1.2 **Analyse avancée**
 - Recherche et analyse des données supprimées.
 - Génération de rapports détaillés pour être utilisés comme preuves dans des enquêtes.
 - Comparaison des données entre plusieurs appareils.
 
-### 3. **Décryptage et contournement de sécurité**
+### 1.3 **Décryptage et contournement de sécurité**
 - Capacité à contourner les mots de passe, les verrouillages d'écran et d'autres mécanismes de sécurité.
 - Extraction de données à partir d'appareils chiffrés ou protégés.
 
-### 4. **Support multi-connexions**
+### 1.4 **Support multi-connexions**
 - Compatible avec des connexions via USB, Wi-Fi, Bluetooth, ou encore via des sauvegardes iCloud.
 
-### 5. **Utilisation médico-légale**
+### 1.5 **Utilisation médico-légale**
 - Certifié pour fournir des données fiables et admissibles dans des contextes légaux.
 - Assure une traçabilité et un traitement sécurisé des données.
 
-### 6. **Interface intuitive**
+### 1.6 **Interface intuitive**
 - Offre une interface utilisateur simple, permettant aux utilisateurs de naviguer facilement entre les fonctionnalités (par exemple, "Phone data preview" ou "Hack phone").
 
 ## Domaines d'utilisation
@@ -61,19 +61,19 @@ Pour atteindre nos objectifs, nous avons adopté une approche bidirectionnelle c
 
 
 
-# 1 Analyse Dynamique de MOBILedit Forensic Express Pro
+# 2. Analyse Dynamique de MOBILedit Forensic Express Pro
 
-## Introduction
+## 2.1 Introduction
 
 L'analyse dynamique représente une méthodologie sophistiquée permettant de comprendre le comportement des logiciels en examinant leurs caractéristiques d'exécution. Appliquée à MOBILedit Forensic Express Pro, cette approche révèle des informations cruciales sur la façon dont l'outil forensique interagit avec les appareils mobiles, gère l'extraction des données et communique avec le système hôte. Ce guide complet explore les subtilités de la conduite d'une analyse dynamique en utilisant trois outils puissants : **Procmon**, **Wireshark** (avec **USBPcap**), **Regshot**, et **Procdot**.
 
-##  Préparation de l'Analyse Dynamique
+##  2.2 Préparation de l'Analyse Dynamique
 
-### 1.1 Configuration de l'Environnement
+### 2.2.1 Configuration de l'Environnement
 
 Un environnement d'analyse correctement configuré est essentiel pour obtenir des résultats précis et fiables. Les composants suivants doivent être soigneusement préparés :
 
-#### Configuration de la Machine Virtuelle
+#### 2.2.2 Configuration de la Machine Virtuelle
 
 
 L'utilisation d'une machine virtuelle offre plusieurs avantages :
@@ -92,7 +92,7 @@ Spécifications recommandées pour la VM :
   ![image](https://github.com/user-attachments/assets/359f5bb2-d6cc-4e97-b98a-85a852d435ed)
 
 
-#### Exigences d'Installation des Outils
+#### 2.2.3 Exigences d'Installation des Outils
 
 Chaque outil d'analyse nécessite une configuration spécifique :
 
@@ -134,7 +134,7 @@ Chaque outil d'analyse nécessite une configuration spécifique :
 - Paramètres de capture de registre optimisés
 - Dossier de sortie des rapports défini
   
-### 1.2 Préparation des Appareils de Test
+### 2.2.4 Préparation des Appareils de Test
 
 Le choix et la préparation des appareils de test impactent significativement la qualité de l'analyse :
 
@@ -145,9 +145,9 @@ Le choix et la préparation des appareils de test impactent significativement la
 - Débogage USB activé
 - Installation correcte des pilotes vérifiée
 
-## 2. Analyse Avancée avec Procmon
+## 2.2.4 Analyse Avancée avec Procmon
 
-### 2.1 Capacités Approfondies de Procmon
+### Capacités Approfondies de Procmon
 
 Les capacités de surveillance de Procmon s'étendent au-delà des appels système de base :
 
@@ -172,7 +172,7 @@ Les capacités de surveillance de Procmon s'étendent au-delà des appels systè
 - Opérations sur les handles
 - Changements de contexte de sécurité
 
-### 2.2 Méthodologie Avancée pour Procmon
+###  Méthodologie Avancée pour Procmon
 
 Le processus d'analyse peut être optimisé grâce à une préparation minutieuse :
 
@@ -206,9 +206,9 @@ L'interprétation des données capturées nécessite une approche systématique 
 - Communications réseau
 - Chargement de DLL externes
 
-## 3. Analyse Approfondie avec Wireshark et USBPcap
+## 2.2.5 Analyse Approfondie avec Wireshark et USBPcap
 
-### 3.1 Compréhension du Trafic USB
+###  Compréhension du Trafic USB
 
 L'analyse du trafic USB révèle des informations cruciales sur la communication entre MOBILedit et l'appareil mobile :
 
@@ -224,7 +224,7 @@ L'analyse du trafic USB révèle des informations cruciales sur la communication
 - Protocoles propriétaires
 - Communications de débogage
 
-### 3.2 Méthodologie d'Analyse USB
+###  Méthodologie d'Analyse USB
 
 Une approche structurée de l'analyse du trafic USB comprend :
 
@@ -243,9 +243,9 @@ Une approche structurée de l'analyse du trafic USB comprend :
 - Identification des commandes et réponses
 - Analyse des protocoles de haut niveau
 
-## 4. Visualisation Avancée avec Procdot
+## 2.2.6 Visualisation Avancée avec Procdot
 
-### 4.1 Exploitation Optimale de Procdot
+### Exploitation Optimale de Procdot
 
 Procdot offre des capacités puissantes de visualisation :
 
@@ -264,9 +264,9 @@ Je vais ajouter une section complète sur Regshot après la partie Procmon et av
 
 
 
-## 5. Analyse Comparative avec Regshot
+## 2.2.7 Analyse Comparative avec Regshot
 
-### 5.1 Capacités et Fonctionnalités de Regshot
+### Capacités et Fonctionnalités de Regshot
 
 L'utilisation de Regshot permet une analyse comparative approfondie des changements système :
 
@@ -284,7 +284,7 @@ L'utilisation de Regshot permet une analyse comparative approfondie des changeme
 - Modifications de structure des répertoires
 - Changements dans les droits d'accès
 
-### 5.2 Méthodologie d'Utilisation de Regshot
+### Méthodologie d'Utilisation de Regshot
 
 Une approche méthodique garantit des résultats précis et exploitables :
 
@@ -301,7 +301,7 @@ Une approche méthodique garantit des résultats précis et exploitables :
 - Sélection du format de rapport approprié
 - Configuration des filtres de comparaison
 
-### 5.3 Analyse des Résultats Regshot
+### Analyse des Résultats Regshot
 
 L'interprétation des rapports Regshot nécessite une analyse structurée :
 
@@ -317,42 +317,7 @@ L'interprétation des rapports Regshot nécessite une analyse structurée :
 - Installation de nouveaux services
 - Création de clés de démarrage automatique
 - Modifications des paramètres système
-- Installation de pilotes ou DLLs
-
-### 5.4 Intégration avec Autres Outils
-
-Regshot complète efficacement les autres outils d'analyse :
-
-**Synergies avec Procmon :**
-- Validation croisée des modifications détectées
-- Confirmation des changements permanents
-- Identification des faux positifs
-- Documentation des changements système
-
-**Complémentarité d'Analyse :**
-- Comparaison avec les logs Wireshark
-- Corrélation avec les visualisations ProcDot
-- Validation des hypothèses d'analyse
-- Construction d'une vue système complète
+- Installation de pilotes ou DLL
 
 
-## 6. Corrélation et Analyse Intégrée
-
-### 6.1 Synthèse des Données
-
-L'intégration des données des différents outils permet une compréhension complète :
-
-**Points de Corrélation :**
-- Correspondance entre les événements système et le trafic USB
-- Relations entre les accès fichiers et les transferts de données
-- Synchronisation des activités entre les différents processus
-
-**Analyse Temporelle :**
-- Séquençage des opérations
-- Identification des dépendances temporelles
-- Repérage des goulots d'étranglement
-- Optimisation des performances
-
-## Conclusion
-
-L'analyse dynamique de MOBILedit Forensic Express Pro nécessite une approche méthodique et une compréhension approfondie des outils utilisés. Ce guide fournit une base solide pour conduire une analyse complète et obtenir des résultats significatifs. La combinaison de Procmon, Wireshark avec USBPcap, et Procdot permet une compréhension détaillée du comportement de l'outil, essentielle pour les investigations forensiques et l'évaluation des capacités du logiciel.
+## 
