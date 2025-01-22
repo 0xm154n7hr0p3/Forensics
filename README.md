@@ -320,4 +320,86 @@ L'interprétation des rapports Regshot nécessite une analyse structurée :
 - Installation de pilotes ou DLL
 
 
-## 
+# Étude de cas : Analyse dynamique d'une acquisition des contacts via USB
+
+## 1. Analyse du trafic USB avec Wireshark
+![pasted_image025](https://github.com/user-attachments/assets/c14470f2-96ad-48f0-8d68-4fce3f0d2cb9)
+![pasted_image024](https://github.com/user-attachments/assets/4eea7fbb-354c-45f6-ac0c-c439fc01882f)
+
+### Observations générales
+L’analyse des captures Wireshark met en évidence un trafic intensif entre l’ordinateur hôte et le périphérique mobile, majoritairement basé sur le protocole **USB Bulk Transfer**. Ce protocole est couramment utilisé pour transférer de grandes quantités de données de manière fiable, mais il ne garantit pas de chiffrement intrinsèque des données. 
+
+Les multiples entrées « URB_BULK in » et « URB_BULK out » montrent une communication bidirectionnelle soutenue, ce qui est typique des opérations d’extraction ou de synchronisation des données. Chaque paquet présente une taille constante de **539 bytes**, suggérant un formatage standardisé des blocs de données échangés.
+
+### Découverte critique : Absence de chiffrement
+Un point d’inquiétude majeur réside dans le fait que les données semblent être transmises en clair. En analysant les paquets, on peut identifier des chaînes de texte lisibles telles que :
+- **"android"** : une référence aux fichiers système Android ou aux données utilisateur.
+- **"cursor"** : suggérant une extraction liée à des bases de données SQLite, souvent utilisées par les applications mobiles.
+- **"telegram"** : une référence explicite à l’application de messagerie, indiquant que des informations sensibles peuvent être récupérées.
+
+Cette absence de chiffrement expose les données à des risques importants, en particulier si le trafic est intercepté par un tiers malveillant disposant d’un accès physique ou réseau au bus USB.
+
+### Analyse temporelle et comportemental
+Les timestamps rapprochés des transmissions (par exemple : **83.714986, 83.713439**) confirment une extraction séquentielle automatisée. Cela indique que l’outil effectue une analyse systématique des composants du téléphone. Ces séquences répétitives peuvent également fournir des indices sur l'ordre des opérations effectuées par le logiciel (extraction des contacts, des messages, des journaux d’appels, etc.).
+
+### Recommandations de sécurité
+- **Implémentation du chiffrement des données en transit** : Le trafic USB devrait être encapsulé dans des protocoles sécurisés comme TLS.
+- **Mécanismes de journalisation** : Les appareils mobiles et les outils de forensics devraient fournir des logs explicites pour retracer les activités.
+
+---
+
+## 2. Analyse des processus avec ProcMon
+![pasted_image027](https://github.com/user-attachments/assets/ff2c39fa-083c-41cd-b828-ab06f537f1ba)
+![pasted_image026](https://github.com/user-attachments/assets/04b8240a-7e8a-4d00-b3c4-2e021931975f)
+
+### Structure et architecture du logiciel
+L’utilisation de **Process Monitor** a permis de cartographier l’architecture d’extraction du logiciel **MOBILedit Forensic Express**. Il apparaît clairement que l’application utilise une **structure hiérarchique et modulaire** :
+1. Le processus principal, **MOBILedit Forensic Express.exe** (PID: 2604), agit comme **coordinateur**.
+2. Il engendre plusieurs sous-processus spécifiques, chacun étant dédié à un domaine de données précis :
+   - **Comptes utilisateurs** : Analyse des comptes présents sur l’appareil (par exemple, Google, Facebook).
+   - **Contacts** : Extraction détaillée des informations personnelles de la base de données des contacts.
+   - **Paramètres de sécurité** : Récupération de paramètres critiques tels que les mots de passe Wi-Fi, les paramètres VPN ou les préférences utilisateur.
+   - **Carte SIM** : Lecture des données IMSI/IMEI ou des répertoires de contacts de la carte SIM.
+   - **Journaux d'appels** : Analyse historique des appels entrants, sortants et manqués.
+
+### Détection de comportements potentiellement abusifs
+- **Accès aux fichiers sensibles** : Les sous-processus montrent des requêtes répétées vers des fichiers critiques du système Android, souvent localisés dans des répertoires protégés comme **/data/data/[package_name]**. Ces accès nécessitent des permissions root ou administrateur.
+- **Récupération exhaustive** : L’outil semble collecter des données bien au-delà des simples métadonnées, incluant parfois des caches ou des données non visibles à l'utilisateur final.
+
+### Suggestions d’améliorations
+- Limiter l’accès aux sous-processus uniquement aux données strictement nécessaires.
+- Ajouter une séparation claire entre les composants de collecte et les composants d’analyse pour réduire les risques en cas de compromission.
+
+---
+
+## 3. Analyse des modifications du Registre avec Regshot
+![pasted_image029](https://github.com/user-attachments/assets/f9918fac-c904-4e8d-b4b0-d20e3ce2329b)
+![pasted_image028](https://github.com/user-attachments/assets/f4e4da90-4a88-4417-8a47-672e031aa511)
+
+### Création de clés et modifications détectées
+L’utilisation de **Regshot** a révélé plusieurs modifications importantes dans le registre Windows après l’exécution du logiciel, indiquant un impact significatif sur l’environnement système. Voici quelques exemples notables :
+
+1. **Création de clés** :
+   - **HKLM\SOFTWARE\Microsoft\Windows\Windows Error Reporting\TermReason** : Probablement utilisé pour capturer et analyser les crashs de l’application.
+   - **HKU\S-1-5-21-...\Keyboard Layout** : Des modifications dans cette clé pourraient suggérer une tentative de gestion des entrées clavier, ce qui est une pratique risquée.
+
+2. **Modifications de valeurs existantes** :
+   - **ShowToast** : Cette valeur est généralement associée aux notifications utilisateur. Cela pourrait indiquer que l'application génère des alertes en arrière-plan.
+   - **Session Explorer** : Des modifications ici pourraient influencer la manière dont les sessions utilisateur sont gérées par l’OS.
+
+3. **Entrées temporaires** :
+   - Création de fichiers journaux et de sessions temporaires pour coordonner les opérations d’extraction.
+
+### Implications et risques
+Ces modifications, bien qu’essentielles pour le fonctionnement du logiciel, posent des problèmes de sécurité :
+- Les modifications non réversibles pourraient affecter l’intégrité du système hôte.
+- Les clés liées aux sessions Explorer peuvent potentiellement être exploitées par des attaquants pour accéder aux informations sensibles.
+
+### Recommandations
+- Mettre en œuvre une solution de restauration automatique du registre après l’exécution de l’outil.
+- Documenter et alerter l’utilisateur sur chaque modification apportée.
+
+---
+
+
+
