@@ -400,6 +400,66 @@ Ces modifications, bien qu’essentielles pour le fonctionnement du logiciel, po
 - Documenter et alerter l’utilisateur sur chaque modification apportée.
 
 ---
+# Étude de cas : Analyse dynamique d'une acquisition des contacts via Wifi
+![pasted_image033](https://github.com/user-attachments/assets/0ea600de-f7a7-4b17-bf58-a7d40bba2a87)
+![pasted_image032](https://github.com/user-attachments/assets/3cc9e56d-15da-4f7d-94a8-c4611159f4a3)
+![pasted_image031](https://github.com/user-attachments/assets/4d6e59c4-b654-464b-bee8-a7f0547ccd12)
+![pasted_image030](https://github.com/user-attachments/assets/c81db25b-f307-4b70-bb03-1a47913c0bdd)
+
+## 1. Analyse du trafic réseau avec Wireshark
+
+L'analyse des captures Wireshark révèle un trafic TCP significatif entre l'application MOBILeditForensicExpress.exe (PID 4732) et l'adresse IP 192.168.1.119. Les communications montrent plusieurs caractéristiques notables :
+
+### Protocoles identifiés
+Le trafic est principalement composé de paquets TCP sur le port 10161->50032, avec des séquences régulières d'échanges [PSH, ACK]. Cette configuration indique une transmission active de données en texte clair, sans chiffrement, ce qui représente une vulnérabilité potentielle.
+
+### Structure des échanges
+Les trames capturées ont une taille moyenne de 529 octets, avec des séquences répétitives suggérant un transfert structuré de données de contacts. L'absence de chiffrement TLS/SSL permet d'observer directement le contenu des paquets, exposant potentiellement des informations sensibles.
+
+## 2. Analyse des processus avec Process Monitor
+![pasted_image040](https://github.com/user-attachments/assets/229d9a7d-7be2-4a76-aec5-8950f37021f2)
+![pasted_image039](https://github.com/user-attachments/assets/288bff89-5c0e-4e07-942b-802520877d63)
+![pasted_image038](https://github.com/user-attachments/assets/a4604b49-35f6-46ff-8e9b-fb1312880c94)
+
+L'analyse des graphes de processus révèle une architecture d'exécution complexe :
+
+### Processus principal
+MOBILeditForensicExpress.exe agit comme processus parent, générant plusieurs sous-processus et créant des fichiers temporaires dans le répertoire :
+```
+C:\Users\oem\AppData\Local\Temp\MOBILeditForensicExpress\
+```
+
+### Fichiers générés
+Le logiciel crée plusieurs fichiers avec des extensions spécifiques :
+- LinWK.png
+- FoukLl.xml
+- upDUSN.png
+- iBmY.xml
+
+Ces fichiers semblent être utilisés pour stocker temporairement les données extraites pendant l'acquisition.
+
+## 3. Analyse des modifications du registre Windows
+![pasted_image035](https://github.com/user-attachments/assets/7d4ad259-eb04-48c7-b266-2e4b613fd2a4)
+![pasted_image034](https://github.com/user-attachments/assets/f35ccd00-cd97-4e10-9e33-a7a50456c1b8)
+![pasted_image037](https://github.com/user-attachments/assets/171e3279-c96d-4d22-84e8-c45f6e318997)
+![pasted_image036](https://github.com/user-attachments/assets/2b1821f3-7637-4418-8fb5-334b834600e3)
+
+
+L'analyse des différences de registre via Regshot révèle des modifications substantielles :
+
+### Modifications principales
+- 28441 clés ont été supprimées
+- Impact majeur dans HKLM\DRIVERS\DriverDatabase
+- Nombreuses modifications dans les sous-clés DeviceIds
+
+### Chemins affectés
+Les modifications concernent principalement les pilotes et périphériques :
+```
+HKLM\DRIVERS\DriverDatabase\DeviceIds\*
+HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\
+```
+
+Cette analyse montre une application qui effectue des opérations privilégiées nécessitant des modifications système importantes pour établir la communication avec le dispositif mobile.
 
 
 
