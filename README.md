@@ -46,15 +46,13 @@ L'architecture logicielle de l'application, notamment :
 1. Les composants principaux et leurs interactions
 2. Les mécanismes de traitement des données
 3. Les protocoles de communication utilisés
-4. Les mesures de sécurité implémentées
-5. Les dépendances externes et leurs implications
+
 
 Les processus d'acquisition de données, incluant :
 
 1. Les méthodes d'extraction logiques
 2. Les protocoles de communication avec les appareils mobiles
-3. Les mécanismes de validation et d'intégrité des données
-4. Les formats de stockage et d'export des données extraites
+
 
 ## Méthodologie d'Analyse
 Pour atteindre nos objectifs, nous avons adopté une approche bidirectionnelle combinant **analyse statique et dynamique**. Cette méthodologie holistique permet d'obtenir une compréhension complète du logiciel sous tous ses aspects.
