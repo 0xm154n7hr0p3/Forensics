@@ -460,4 +460,49 @@ HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\
 Cette analyse montre une application qui effectue des opérations privilégiées nécessitant des modifications système importantes pour établir la communication avec le dispositif mobile.
 
 
+## analyse de traffic
+
+### Empreinte RSA :
+
+35:67:12:BD:69:88:55:BB:13:56:39:68:C8:5B:D9:88
+![WhatsApp Image 2025-01-25 at 12 58 14 AM](https://github.com/user-attachments/assets/5fe146c7-9c6d-42d5-9c0c-8b720a7b4f3b)
+
+- **Description** :  
+  Il s'agit d'un identifiant unique pour la clé RSA générée par l'ordinateur (ou l'outil de forensic) tentant de se connecter à l'appareil.  
+  Cela garantit que l'appareil ne fait confiance qu'aux connexions provenant d'ordinateurs autorisés.
+
+---
+
+#### Invite de Débogage USB :
+- **Description** :  
+  L'appareil demande s'il faut autoriser le débogage USB à partir de l'ordinateur connecté.  
+  L'option **"Toujours autoriser sur cet ordinateur"** permet à l'appareil de mémoriser l'empreinte RSA pour les connexions futures.
+
+---
+
+#### Explication :
+1. **Empreinte RSA** :  
+   L'empreinte RSA est une mesure de sécurité utilisée pour authentifier l'ordinateur qui tente de se connecter à l'appareil pour le débogage. Elle est générée à partir de la clé publique RSA de l'ordinateur.
+
+2. **Débogage USB** :  
+   Lorsque le débogage USB est activé, l'appareil génère une paire de clés RSA. La clé publique est envoyée à l'appareil, et l'empreinte (un hachage de la clé publique) est affichée pour vérification.  
+   En acceptant l'empreinte, l'appareil fait confiance à l'ordinateur pour les sessions de débogage futures.
+![Screenshot from 2025-01-18 18-23-03](https://github.com/user-attachments/assets/4bb38882-1f61-4ed5-b542-0685a52382df)
+
+---
+
+#### Étapes Suivantes :
+1. **Vérifier l'Empreinte RSA** :  
+   Assurez-vous que l'empreinte correspond à celle générée par votre outil de forensic ou votre ordinateur.  
+   Cette étape est cruciale pour éviter tout accès non autorisé à l'appareil.
+
+2. **Autoriser le Débogage USB** :  
+   Si vous faites confiance à l'ordinateur, sélectionnez **"Toujours autoriser sur cet ordinateur"** pour éviter d'être invité à nouveau à l'avenir.
+
+3. **Procéder à l'Analyse Forensic** :  
+   Une fois le débogage USB autorisé, votre outil de forensic devrait pouvoir communiquer avec l'appareil et extraire les données.
+
+###  Énumération de l'Appareil
+
+
 
