@@ -502,137 +502,61 @@ Cette analyse montre une application qui effectue des opérations privilégiées
 3. **Procéder à l'Analyse Forensic** :  
    Une fois le débogage USB autorisé, votre outil de forensic devrait pouvoir communiquer avec l'appareil et extraire les données.
 
-###  Énumération de l'Appareil
-
-![Screenshot from 2025-01-18 18-24-16](https://github.com/user-attachments/assets/aaec952b-21e6-4d23-9aa9-4031b449cdc3)
-
-after that mobileedit tries to run it's agent in the phone
-
-![Screenshot from 2025-01-18 18-35-13](https://github.com/user-attachments/assets/09a39c1e-49d6-4043-97c7-3f533ed42166)
-
-but the agent is not yet installed so automatically it gets an error
-
-![Screenshot from 2025-01-18 18-35-47](https://github.com/user-attachments/assets/5c7e8af0-736d-401d-99ea-102639db1094)
-
-#### debugging window manager
-La commande adb shell dumpsys window fournit un aperçu détaillé de l'état actuel du gestionnaire de fenêtres sur un appareil Android. Elle permet de visualiser des informations sur les fenêtres actives, leur hiérarchie, leur focus, ainsi que les configurations d'affichage et les méthodes d'entrée (comme le clavier). Cet outil est principalement utilisé pour déboguer des problèmes liés à l'affichage, aux transitions d'applications ou au comportement des fenêtres dans des modes multi-fenêtres.
-
-![Screenshot from 2025-01-18 18-43-17](https://github.com/user-attachments/assets/59c4759b-d8ce-4d0e-9b75-211c47ac877d)
-
-#### enumerating processes
- shell ps lists running processes on an Android device, similar to ps on Linux. It shows process IDs (PID), user, and command.
-![Screenshot from 2025-01-18 18-44-58](https://github.com/user-attachments/assets/76399ebf-09ff-4bc6-a608-0ea858314271)
-
-#### more enumeration
-The adb shell dumpsys iphonesubinfo command on Android retrieves subscriber-related information, such as the device's phone number, SIM serial number, and other telephony details. Despite the name, it has no connection to Apple's iPhone—it is entirely an Android-specific command.
-![Screenshot from 2025-01-18 18-57-10](https://github.com/user-attachments/assets/b24bb153-d57b-4262-8417-cb63a66f3d20)
 
 
-The command provides details like:
+#### Installation de l'Agent
 
-    DeviceId: The IMEI of the device.
-    SubscriberId: The IMSI associated with the SIM.
-    Line1Number: The phone number (if available).![Screenshot from 2025-02-02 14-46-31](https://github.com/user-attachments/assets/3b643c04-5dc5-4af7-91b8-c20c55f6fec3)
-
-    SimSerialNumber: The serial number of the SIM card.
-
-but in our case it won't work, since the command is deprecated since Android update (5.0 - Lollilop), so mobile edit tries another command:
-
-![Screenshot from 2025-02-02 14-46-31](https://github.com/user-attachments/assets/ebe3b6a9-d953-4ac2-b97b-d7eb08c50a07)
-
-
-#### system propreties
-
-The getprop command in Android is used to retrieve system properties, which are key-value pairs that store various configuration settings and information about the device. These properties can include details about the hardware, software, network, and other system-level configurations.
-
-![Screenshot from 2025-01-18 19-02-44](https://github.com/user-attachments/assets/24ff9f89-99cb-41b1-b4ad-729bc0d8c47d)
-
-The Android Secure ID (android_id) is a unique 64-bit identifier assigned to each Android device. It is specific to the device and the user account, meaning it can change if the device is factory reset or the user account is removed. The android_id is often used by apps and services to uniquely identify a device without requiring sensitive permissions like accessing the IMEI.
-
-![Screenshot from 2025-02-02 17-56-41](https://github.com/user-attachments/assets/b2dbdb83-f6a6-4413-b6bf-b77105fb7973)
-
-#### user properties
-
-The id command in Linux and Android (via ADB shell) displays the user ID (UID), group ID (GID), and supplementary group IDs of the current user.
-
-![Screenshot from 2025-01-18 19-05-09](https://github.com/user-attachments/assets/9c8c0dc9-610c-4e33-87d7-6e0005cf849a)
-
-results
-
-![Screenshot from 2025-01-18 19-05-24](https://github.com/user-attachments/assets/9a68f1c6-a22e-4a09-97f5-fe0c640cd9c3)
-
-it also checks if the user is root
-
-![Screenshot from 2025-01-18 19-08-20](https://github.com/user-attachments/assets/5f221df4-170a-4345-aa32-6a81f948945b)
-
-#### services enumeration
-
-The adb shell service list command shows all system services running on an Android device. These services manage core functionalities like telephony, WiFi, package management, and more.
-
-![Screenshot from 2025-01-18 19-08-55](https://github.com/user-attachments/assets/d861f261-5f97-4f2c-b100-2a85264fa608)
-
-
-#### installing the agent
-
-after the enumeration mobileedit trys to restart the agent 
+Après l'énumération, MobileEdit essaie de redémarrer l'agent.
 
 ![Screenshot from 2025-01-18 19-44-47](https://github.com/user-attachments/assets/28f72c23-b02d-4405-999f-f76c8dc3882e)
 
-and as expected it wont work since it not yet installed
+Et comme prévu, cela ne fonctionne pas puisqu'il n'est pas encore installé
 
 ![Screenshot from 2025-01-18 19-45-11](https://github.com/user-attachments/assets/659d07be-c662-4cce-8cf6-6ca2b8c69cbf)
 
 ![Screenshot from 2025-01-18 19-45-23](https://github.com/user-attachments/assets/b5592e7e-e800-45c4-883b-f0f523dfab70)
 
-so it tries to uninstall it if there is a malfunctioning verion of the agent
+Il essaie donc de le désinstaller s'il existe une version défectueuse de l'agent
 
 ![Screenshot from 2025-01-18 19-48-06](https://github.com/user-attachments/assets/862fffc0-2c67-4997-be8b-d34f41f400e2)
 
-then it tries to install the agent wich is located inside the program's files after sending it to the mobile phone
+Ensuite, il tente d'installer l'agent qui se trouve dans les fichiers du programme après l'avoir envoyé au téléphone mobile
 
 ![image](https://github.com/user-attachments/assets/97c688f7-426b-40d9-ad72-f088d92d6c72)
 
-the agent is sent without any protection and can be easilly obtained from the network dump
+L'agent est envoyé sans aucune protection et peut être facilement obtenu à partir de la capture réseau
 
 ![Screenshot from 2025-01-23 20-50-38](https://github.com/user-attachments/assets/6f2a41ba-2008-43f2-8415-8dc2b9c854e5)
 
-* installing the agent 
+* Installation de l'agent
 
 ![Screenshot from 2025-01-23 20-51-34](https://github.com/user-attachments/assets/25902bef-bfcc-405c-8f72-5f860036e1dd)
 
-* enabling the agent
-The pm enable command in ADB is used to enable a previously disabled app or component on an Android device.
+* Activation de l'agent
+La commande pm enable dans ADB est utilisée pour activer une application ou un composant précédemment désactivé sur un appareil Android.
 
 ![Screenshot from 2025-01-23 20-52-14](https://github.com/user-attachments/assets/766a43b1-23ae-4fe1-86ed-e7bf584028ad)
 
-* enumerating users and enabling the agent for the current user
+* Énumération des utilisateurs et activation de l'agent pour l'utilisateur actuel
 
-  ![Screenshot from 2025-01-23 20-52-40](https://github.com/user-attachments/assets/f2d01358-4bf6-4f71-a539-f7b9c9fa799d)
+![Screenshot from 2025-01-23 20-52-40](https://github.com/user-attachments/assets/f2d01358-4bf6-4f71-a539-f7b9c9fa799d)
 
-  ![Screenshot from 2025-01-23 20-53-05](https://github.com/user-attachments/assets/b0d6e30a-1966-4aa7-9551-156486508ec7)
+![Screenshot from 2025-01-23 20-53-05](https://github.com/user-attachments/assets/b0d6e30a-1966-4aa7-9551-156486508ec7)
 
-  ![Screenshot from 2025-01-23 20-53-19](https://github.com/user-attachments/assets/b29ace03-52cf-4a67-85ab-699ad0965300)
+![Screenshot from 2025-01-23 20-53-19](https://github.com/user-attachments/assets/b29ace03-52cf-4a67-85ab-699ad0965300)
 
+* Désoccultation de l'agent
 
-* unhiding the agent
+![Screenshot from 2025-01-23 20-53-38](https://github.com/user-attachments/assets/50a8a03b-17b1-4f17-b9fa-3fd16e392083)
 
-  ![Screenshot from 2025-01-23 20-53-38](https://github.com/user-attachments/assets/50a8a03b-17b1-4f17-b9fa-3fd16e392083)
+* Attribution des permissions nécessaires
 
-* granting the needed permissions
+![Screenshot from 2025-01-24 23-52-56](https://github.com/user-attachments/assets/33a8beac-6431-4c00-8112-628f93147277)
 
-  ![Screenshot from 2025-01-24 23-52-56](https://github.com/user-attachments/assets/33a8beac-6431-4c00-8112-628f93147277)
-
-
-* after ensuring proper installation of the agent, it removes the apk file
+* Après s'être assuré de la bonne installation de l'agent, il supprime le fichier apk
 
 ![Screenshot from 2025-01-24 23-54-38](https://github.com/user-attachments/assets/528547bd-5748-4794-a92d-3711abd90c22)
 
-  
-### aquisition
+### Acquisition
 
-
-# static analysis of mobile edit
-
-
-
-
+# Analyse statique de MobileEdit
