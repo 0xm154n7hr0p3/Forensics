@@ -578,6 +578,40 @@ after the enumeration mobileedit trys to restart the agent
 
 ![Screenshot from 2025-01-18 19-44-47](https://github.com/user-attachments/assets/28f72c23-b02d-4405-999f-f76c8dc3882e)
 
+and as expected it wont work since it not yet installed
+
+![Screenshot from 2025-01-18 19-45-11](https://github.com/user-attachments/assets/659d07be-c662-4cce-8cf6-6ca2b8c69cbf)
+
+![Screenshot from 2025-01-18 19-45-23](https://github.com/user-attachments/assets/b5592e7e-e800-45c4-883b-f0f523dfab70)
+
+so it tries to uninstall it if there is a malfunctioning verion of the agent
+
+![Screenshot from 2025-01-18 19-48-06](https://github.com/user-attachments/assets/862fffc0-2c67-4997-be8b-d34f41f400e2)
+
+then it tries to install the agent wich is located inside the program's files after sending it to the mobile phone
+
+![image](https://github.com/user-attachments/assets/97c688f7-426b-40d9-ad72-f088d92d6c72)
+
+the agent is sent without any protection and can be easilly obtained from the network dump
+
+![Screenshot from 2025-01-23 20-50-38](https://github.com/user-attachments/assets/6f2a41ba-2008-43f2-8415-8dc2b9c854e5)
+
+* installing the agent 
+
+![Screenshot from 2025-01-23 20-51-34](https://github.com/user-attachments/assets/25902bef-bfcc-405c-8f72-5f860036e1dd)
+
+* enabling the agent
+
+![Screenshot from 2025-01-23 20-52-14](https://github.com/user-attachments/assets/766a43b1-23ae-4fe1-86ed-e7bf584028ad)
+
+
+
+
+
+
+
+
+
 
 
 
