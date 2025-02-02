@@ -557,8 +557,6 @@ La commande pm enable dans ADB est utilisée pour activer une application ou un 
 
 ![Screenshot from 2025-01-24 23-54-38](https://github.com/user-attachments/assets/528547bd-5748-4794-a92d-3711abd90c22)
 
-### Acquisition
-
 # Analyse statique de MobileEdit
 
 La rétro-ingénierie de l'application s'est avérée être un défi insurmontable en raison de la complexité inhérente introduite par le framework Qt. L'utilisation intensive de structures spécifiques à Qt, telles que QString, QListData, et la gestion dynamique de la mémoire (dynamic memory management), a obscurci la logique sous-jacente et rendu difficile le suivi du flux d'exécution (execution flow). De plus, la dépendance de l'application à des couches d'abstraction (abstraction layers), à la programmation événementielle (event-driven programming) basée sur le mécanisme des signals et slots a encore compliqué l'analyse. Malgré plusieurs tentatives, le manque de familiarité avec l'architecture de Qt et l'absence de points d'entrée clairs (clear entry points) ont entravé les progrès, laissant le fonctionnement interne de l'application largement inexploré. Cette expérience met en lumière les obstacles importants posés par les frameworks modernes dans les efforts de rétro-ingénierie et souligne la nécessité d'outils spécialisés et de connaissances approfondies pour surmonter efficacement de telles complexités.
