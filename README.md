@@ -504,5 +504,49 @@ Cette analyse montre une application qui effectue des opérations privilégiées
 
 ###  Énumération de l'Appareil
 
+![Screenshot from 2025-01-18 18-24-16](https://github.com/user-attachments/assets/aaec952b-21e6-4d23-9aa9-4031b449cdc3)
+
+after that mobileedit tries to run it's agent in the phone
+
+![Screenshot from 2025-01-18 18-35-13](https://github.com/user-attachments/assets/09a39c1e-49d6-4043-97c7-3f533ed42166)
+
+but the agent is not yet installed so automatically it gets an error
+
+![Screenshot from 2025-01-18 18-35-47](https://github.com/user-attachments/assets/5c7e8af0-736d-401d-99ea-102639db1094)
+
+#### debugging window manager
+La commande adb shell dumpsys window fournit un aperçu détaillé de l'état actuel du gestionnaire de fenêtres sur un appareil Android. Elle permet de visualiser des informations sur les fenêtres actives, leur hiérarchie, leur focus, ainsi que les configurations d'affichage et les méthodes d'entrée (comme le clavier). Cet outil est principalement utilisé pour déboguer des problèmes liés à l'affichage, aux transitions d'applications ou au comportement des fenêtres dans des modes multi-fenêtres.
+
+![Screenshot from 2025-01-18 18-43-17](https://github.com/user-attachments/assets/59c4759b-d8ce-4d0e-9b75-211c47ac877d)
+
+#### enumerating processes
+ shell ps lists running processes on an Android device, similar to ps on Linux. It shows process IDs (PID), user, and command.
+![Screenshot from 2025-01-18 18-44-58](https://github.com/user-attachments/assets/76399ebf-09ff-4bc6-a608-0ea858314271)
+
+#### more enumeration
+The adb shell dumpsys iphonesubinfo command on Android retrieves subscriber-related information, such as the device's phone number, SIM serial number, and other telephony details. Despite the name, it has no connection to Apple's iPhone—it is entirely an Android-specific command.
+![Screenshot from 2025-01-18 18-57-10](https://github.com/user-attachments/assets/b24bb153-d57b-4262-8417-cb63a66f3d20)
+
+
+The command provides details like:
+
+    DeviceId: The IMEI of the device.
+    SubscriberId: The IMSI associated with the SIM.
+    Line1Number: The phone number (if available).![Screenshot from 2025-02-02 14-46-31](https://github.com/user-attachments/assets/3b643c04-5dc5-4af7-91b8-c20c55f6fec3)
+
+    SimSerialNumber: The serial number of the SIM card.
+
+but in our case it won't work, since the command is deprecated since Android update (5.0 - Lollilop), so mobile edit tries another command:
+
+![Screenshot from 2025-02-02 14-46-31](https://github.com/user-attachments/assets/ebe3b6a9-d953-4ac2-b97b-d7eb08c50a07)
+
+
+#### system propreties
+
+The getprop command in Android is used to retrieve system properties, which are key-value pairs that store various configuration settings and information about the device. These properties can include details about the hardware, software, network, and other system-level configurations.
+
+![Screenshot from 2025-01-18 19-02-44](https://github.com/user-attachments/assets/24ff9f89-99cb-41b1-b4ad-729bc0d8c47d)
+
+
 
 
