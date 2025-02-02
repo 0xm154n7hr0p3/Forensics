@@ -614,9 +614,24 @@ The pm enable command in ADB is used to enable a previously disabled app or comp
   ![Screenshot from 2025-01-23 20-53-19](https://github.com/user-attachments/assets/b29ace03-52cf-4a67-85ab-699ad0965300)
 
 
+* unhiding the agent
+
+  ![Screenshot from 2025-01-23 20-53-38](https://github.com/user-attachments/assets/50a8a03b-17b1-4f17-b9fa-3fd16e392083)
+
+* granting the needed permissions
+
+  ![Screenshot from 2025-01-24 23-52-56](https://github.com/user-attachments/assets/33a8beac-6431-4c00-8112-628f93147277)
 
 
+* after ensuring proper installation of the agent, it removes the apk file
 
+![Screenshot from 2025-01-24 23-54-38](https://github.com/user-attachments/assets/528547bd-5748-4794-a92d-3711abd90c22)
+
+  
+### aquisition
+
+
+# static analysis of mobile edit
 
 
 
