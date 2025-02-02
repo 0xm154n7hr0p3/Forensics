@@ -547,6 +547,10 @@ The getprop command in Android is used to retrieve system properties, which are 
 
 ![Screenshot from 2025-01-18 19-02-44](https://github.com/user-attachments/assets/24ff9f89-99cb-41b1-b4ad-729bc0d8c47d)
 
+The Android Secure ID (android_id) is a unique 64-bit identifier assigned to each Android device. It is specific to the device and the user account, meaning it can change if the device is factory reset or the user account is removed. The android_id is often used by apps and services to uniquely identify a device without requiring sensitive permissions like accessing the IMEI.
+
+![Screenshot from 2025-02-02 17-56-41](https://github.com/user-attachments/assets/b2dbdb83-f6a6-4413-b6bf-b77105fb7973)
+
 
 
 
