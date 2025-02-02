@@ -601,13 +601,17 @@ the agent is sent without any protection and can be easilly obtained from the ne
 ![Screenshot from 2025-01-23 20-51-34](https://github.com/user-attachments/assets/25902bef-bfcc-405c-8f72-5f860036e1dd)
 
 * enabling the agent
+The pm enable command in ADB is used to enable a previously disabled app or component on an Android device.
 
 ![Screenshot from 2025-01-23 20-52-14](https://github.com/user-attachments/assets/766a43b1-23ae-4fe1-86ed-e7bf584028ad)
 
+* enumerating users and enabling the agent for the current user
 
+  ![Screenshot from 2025-01-23 20-52-40](https://github.com/user-attachments/assets/f2d01358-4bf6-4f71-a539-f7b9c9fa799d)
 
+  ![Screenshot from 2025-01-23 20-53-05](https://github.com/user-attachments/assets/b0d6e30a-1966-4aa7-9551-156486508ec7)
 
-
+  ![Screenshot from 2025-01-23 20-53-19](https://github.com/user-attachments/assets/b29ace03-52cf-4a67-85ab-699ad0965300)
 
 
 
