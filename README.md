@@ -551,6 +551,35 @@ The Android Secure ID (android_id) is a unique 64-bit identifier assigned to eac
 
 ![Screenshot from 2025-02-02 17-56-41](https://github.com/user-attachments/assets/b2dbdb83-f6a6-4413-b6bf-b77105fb7973)
 
+#### user properties
+
+The id command in Linux and Android (via ADB shell) displays the user ID (UID), group ID (GID), and supplementary group IDs of the current user.
+
+![Screenshot from 2025-01-18 19-05-09](https://github.com/user-attachments/assets/9c8c0dc9-610c-4e33-87d7-6e0005cf849a)
+
+results
+
+![Screenshot from 2025-01-18 19-05-24](https://github.com/user-attachments/assets/9a68f1c6-a22e-4a09-97f5-fe0c640cd9c3)
+
+it also checks if the user is root
+
+![Screenshot from 2025-01-18 19-08-20](https://github.com/user-attachments/assets/5f221df4-170a-4345-aa32-6a81f948945b)
+
+#### services enumeration
+
+The adb shell service list command shows all system services running on an Android device. These services manage core functionalities like telephony, WiFi, package management, and more.
+
+![Screenshot from 2025-01-18 19-08-55](https://github.com/user-attachments/assets/d861f261-5f97-4f2c-b100-2a85264fa608)
+
+
+#### installing the agent
+
+after the enumeration mobileedit trys to restart the agent 
+
+![Screenshot from 2025-01-18 19-44-47](https://github.com/user-attachments/assets/28f72c23-b02d-4405-999f-f76c8dc3882e)
+
+
+
 
 
 
